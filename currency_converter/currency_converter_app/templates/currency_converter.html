@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div>
+  <canvas id="exchangeRateChart"></canvas>
+</div>
+
+<script type="text/javascript">
+
+
+  new Chart("exchangeRateChart", {
+    type: "line",
+    data: {
+      labels: {{rate_dates|safe}},
+      datasets: [
+        {
+          label: "Converted {{amount}} from {{from_currency}} to {{to_currency}}",
+          data: {{rate_values|safe}},
+          borderColor: "rgba(75, 192, 192, 1)",
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+    },
+  });
+</script>
+
+{% endblock content %}
